@@ -146,11 +146,11 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
         return;
     }
 
-    // create instance of chatbot
-    ChatBot* starterBot = new ChatBot("../images/chatbot.png");
+    // create instance of chatbot on the stack
+    ChatBot starterBot("../images/chatbot.png");
 
     // add pointer to chatlogic so that chatbot answers can be passed on to the GUI
-    starterBot->SetChatLogicHandle(this);
+    starterBot.SetChatLogicHandle(this);
 
 
     // identify root node
@@ -173,8 +173,8 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     }
 
     // add chatbot to graph root node
-    starterBot->SetRootNode(rootNode);
-    rootNode->MoveChatbotHere(std::move(*starterBot));
+    starterBot.SetRootNode(rootNode);
+    rootNode->MoveChatbotHere(std::move(starterBot));
 }
 
 void ChatLogic::SetPanelDialogHandle(ChatBotPanelDialog *panelDialog)
